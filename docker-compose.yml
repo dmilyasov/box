@@ -1,0 +1,21 @@
+version: '3.3'
+services:
+    mysql:
+	image: mysql:latest
+    environment:
+    MYSQL_ROOT_PASSWORD: 'changeme'
+    MYSQL_USER: 'redmine'
+    MYSQL_PASS: 'redmine'
+    volumes:
+     - /opt/mysql_data:/var/lib/mysql
+    ports:
+     - "3306:3306"
+    restart: always
+ 
+redmine:
+     build: redmine/
+     ports:
+       - 80:3000
+     volumes:
+       - var/www:/var/www
+     restart: always
